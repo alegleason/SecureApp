@@ -1,0 +1,7 @@
+{
+  "name": "secureLogin",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
