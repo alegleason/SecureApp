@@ -18,7 +18,7 @@ const routes: Routes = [
   {
     path: 'login2',
     loadChildren: () => import('./login2/login2.module').then( m => m.Login2PageModule)
-  },
+  }
 ];
 
 @NgModule({

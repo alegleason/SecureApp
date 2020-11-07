@@ -8,6 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class InputComponent {
   @Input() type: string;
   @Input() placeholder: string;
+  @Input() ngModel: string;
   
   constructor() { }
 

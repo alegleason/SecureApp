@@ -11,16 +11,24 @@ import { AppRoutingModule } from './app-routing.module';
 import { FingerprintAIO } from '@ionic-native/fingerprint-aio/ngx';
 import { LoginPageModule } from './login/login.module';
 
+import { SQLitePorter } from '@ionic-native/sqlite-porter/ngx';
+import { SQLite } from '@ionic-native/sqlite/ngx';
+
+import { HttpClientModule } from '@angular/common/http';
+import { IonicStorageModule } from '@ionic/storage';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
-  LoginPageModule],
+  LoginPageModule, HttpClientModule, IonicStorageModule.forRoot()],
   providers: [
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    FingerprintAIO
+    FingerprintAIO,
+    SQLite,
+    SQLitePorter
   ],
   bootstrap: [AppComponent]
 })
