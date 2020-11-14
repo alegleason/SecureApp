@@ -30,27 +30,27 @@
   <!--<form id="form">-->
   <div *ngIf="hasRegistered">
     <ion-item class="ion-margin-button">
-      <ion-input type="text" [(ngModel)]="mail" placeholder="Email"></ion-input>
+      <ion-input type="text" [(ngModel)]="email" placeholder="Email" name="email"></ion-input>
     </ion-item>
     <br>
     <ion-item class="ion-margin-button">
-      <ion-input type="password" [(ngModel)]="pass" placeholder="Password"></ion-input>
+      <ion-input type="password" [(ngModel)]="password" placeholder="Password" name="password"></ion-input>
     </ion-item>
     <br>
-    <ion-button expand="block" shape="round" (click)="checkCredentialsFront()">Login</ion-button>
+    <ion-button expand="block" shape="round" (click)="OnSubmitLogin()">Login</ion-button>
   </div>
   <!--</form>-->
 
   <div *ngIf="!hasRegistered">
     <ion-item class="ion-margin-button">
-      <ion-input [(ngModel)]="newUser.mail" placeholder="Email"></ion-input>
+      <ion-input [(ngModel)]="newUser.mail" placeholder="Email" name="email"></ion-input>
     </ion-item>
     <br>
     <ion-item class="ion-margin-button">
-      <ion-input type="password" [(ngModel)]="newUser.pass" placeholder="Password"></ion-input>
+      <ion-input type="password" [(ngModel)]="newUser.pass" placeholder="Password" name="password"></ion-input>
     </ion-item>
     <br>
-    <ion-button expand="block" shape="round" (click)="addUser()">Register</ion-button>
+    <ion-button expand="block" shape="round" (click)="OnSubmitLogin()">Register</ion-button>
     <br>
     <!--<ion-list #mylist>
       <ion-list-header>

@@ -3,6 +3,7 @@ import { StorageService, User } from '../services/storage.service';
 import { Platform, ToastController, IonList, NavController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import * as CryptoJS from 'crypto-js';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-login2',

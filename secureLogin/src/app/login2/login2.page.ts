@@ -3,6 +3,7 @@ import { StorageService, User } from '../services/storage.service';
 import { Platform, ToastController, IonList, NavController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import * as CryptoJS from 'crypto-js';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-login2',
@@ -15,9 +16,9 @@ export class Login2Page implements OnInit {
 
   privateKey:string = 'SeguridAd2020';
 
-  mail: any;
-  pass: any;
-  hasRegistered: boolean;
+  email: string;
+  password: any;
+  hasRegistered: boolean = true;
 
   users: User[] = [];
 
@@ -25,53 +26,23 @@ export class Login2Page implements OnInit {
 
   @ViewChild('mylist')mylist: IonList;
 
-  constructor(private router: Router, private storageService: StorageService, private plt: Platform, private toastController: ToastController) {
-    this.plt.ready().then(() => {
-      this.loadUsers();
-    });
+  constructor(private router: Router, private toastController: ToastController, private authService: AuthService) {
+
    }
 
   ngOnInit () {
-    this.hasRegistered = false;
-    //this.storageService.clearStorage();
-  }
- 
-  checkCredentialsFront(){
-    if(this.mail != undefined && this.pass != undefined){
-      this.storageService.checkCredentials(this.mail, this.pass).then(result => {
-        if(result){
-          this.showToastSuccess('Correct credentials');
-          this.router.navigateByUrl('/home');
-        }else{
-          this.showToastFail('Wrong credentials');
-        }
-      });
-    }
+
   }
 
-  addUser(){
-    if(this.newUser.mail != undefined && this.newUser.pass != undefined){
-      this.encryptedText = CryptoJS.AES.encrypt(this.newUser.pass.trim(), this.privateKey.trim()).toString();
-      this.newUser.pass = this.encryptedText;
-
-      this.newUser.id = Date.now();
-      
-      console.log("User " + this.newUser.mail + " saved with password " + this.newUser.pass);
-
-      this.storageService.addUser(this.newUser).then(user => {
-        this.newUser = <User>{};
-        this.showToastSuccess('User added');
-        this.loadUsers();
-        this.hasRegistered = true;
-      })
-    }
+  OnSubmitLogin(){
+    this.authService.login(this.email, this.password).then(res => {
+      this.showToastSuccess('Correct credentials');
+      this.router.navigateByUrl('/home');
+    }).catch(err => {
+      this.showToastFail('Wrong credentials');
+    })
   }
 
-  loadUsers(){
-    this.storageService.getUsers().then(users => {
-      this.users = users;
-    });
-  }
 
   async showToastSuccess(msg){
     const toast = await this.toastController.create({
@@ -90,26 +61,5 @@ export class Login2Page implements OnInit {
     });
     toast.present();
   }
-
-  /*
-  constructor(private db: DatabaseService) { }
-  ngOnInit() {
-    // Avoid race conditions
-    this.db.getDatabaseState().subscribe(ready => {
-      if(ready){
-        this.db.getUsers().subscribe(usrs => {
-          console.log('users changed: ', usrs);
-          this.users = usrs;
-        })
-      }
-    })
-  }
-  addUser(){
-    this.db.addUser(this.user['name'], this.user['mail'], this.user['pass'])
-    .then(_ => {
-      this.user = {};
-    })
-  }
-  */
 
 }
