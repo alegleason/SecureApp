@@ -10,6 +10,7 @@ import { AuthService } from '../services/auth.service';
   templateUrl: './login2.page.html',
   styleUrls: ['./login2.page.scss'],
 })
+
 export class Login2Page implements OnInit {
   unencryptedText:string = "";
   encryptedText:string = "";
