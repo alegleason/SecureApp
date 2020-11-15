@@ -14,11 +14,6 @@
 </ion-header>
 
 <ion-content>
-  <div id="header" *ngIf="!hasRegistered">
-    <h1>Register</h1>
-    <img src="assets/icon/login.png"/>
-    <br>
-  </div>
 
   <div id="header" *ngIf="hasRegistered">
     <h1>Login</h1>
@@ -26,8 +21,6 @@
     <br>
   </div>
 
-
-  <!--<form id="form">-->
   <div *ngIf="hasRegistered">
     <ion-item class="ion-margin-button">
       <ion-input type="text" [(ngModel)]="email" placeholder="Email" name="email"></ion-input>
@@ -38,40 +31,6 @@
     </ion-item>
     <br>
     <ion-button expand="block" shape="round" (click)="OnSubmitLogin()">Login</ion-button>
-  </div>
-  <!--</form>-->
-
-  <div *ngIf="!hasRegistered">
-    <ion-item class="ion-margin-button">
-      <ion-input [(ngModel)]="newUser.mail" placeholder="Email" name="email"></ion-input>
-    </ion-item>
-    <br>
-    <ion-item class="ion-margin-button">
-      <ion-input type="password" [(ngModel)]="newUser.pass" placeholder="Password" name="password"></ion-input>
-    </ion-item>
-    <br>
-    <ion-button expand="block" shape="round" (click)="OnSubmitLogin()">Register</ion-button>
-    <br>
-    <!--<ion-list #mylist>
-      <ion-list-header>
-        <ion-label>Users</ion-label>
-      </ion-list-header>
-  
-      <ion-item-sliding *ngFor="let user of users">
-  
-        <ion-item>
-          <ion-label text-wrap>
-            <h3>{{ user.mail }}</h3>
-            <ion-text color="secondary">
-              <p>{{ user.pass }}</p>
-            </ion-text>
-          </ion-label>
-        </ion-item>
-  
-      </ion-item-sliding>
-  
-  
-    </ion-list>-->
   </div>
   
 </ion-content>

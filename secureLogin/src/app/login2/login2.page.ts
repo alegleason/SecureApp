@@ -26,7 +26,7 @@ export class Login2Page implements OnInit {
 
   @ViewChild('mylist')mylist: IonList;
 
-  constructor(private router: Router, private toastController: ToastController, private authService: AuthService) {
+  constructor(private storageService: StorageService, private router: Router, private toastController: ToastController, private authService: AuthService) {
 
    }
 
@@ -41,6 +41,19 @@ export class Login2Page implements OnInit {
     }).catch(err => {
       this.showToastFail('Wrong credentials');
     })
+  }
+
+  checkCredentialsFront(){
+    if(this.email != undefined && this.password != undefined){
+      this.storageService.checkCredentials(this.email, this.password).then(result => {
+        if(result){
+          this.showToastSuccess('Correct credentials');
+          this.router.navigateByUrl('/home');
+        }else{
+          this.showToastFail('Wrong credentials');
+        }
+      });
+    }
   }
 
 

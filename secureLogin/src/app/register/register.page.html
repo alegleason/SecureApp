@@ -1,0 +1,54 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="primary">
+        <ion-button routerLink="/login">
+          <ion-icon slot="icon-only" name="lock-closed-outline"></ion-icon>
+        </ion-button>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button routerLink="/signup"></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div id="header">
+    <h1>Register</h1>
+    <img src="assets/icon/login.png"/>
+    <br>
+  </div>
+
+  <ion-item class="ion-margin-button">
+    <ion-input [(ngModel)]="email" placeholder="Email" name="email"></ion-input>
+  </ion-item>
+  <br>
+  <ion-item class="ion-margin-button">
+    <ion-input type="password" [(ngModel)]="password" placeholder="Password" name="password"></ion-input>
+  </ion-item>
+  <br>
+  <ion-button expand="block" shape="round" (click)="OnSubmitRegister()">Register</ion-button>
+  <br>
+  <ion-list #mylist>
+    <ion-list-header>
+      <ion-label>Users</ion-label>
+    </ion-list-header>
+
+    <ion-item-sliding *ngFor="let user of users">
+
+      <ion-item>
+        <ion-label text-wrap>
+          <h3>{{ user.mail }}</h3>
+          <ion-text color="secondary">
+            <p>{{ user.pass }}</p>
+          </ion-text>
+        </ion-label>
+      </ion-item>
+
+    </ion-item-sliding>
+
+
+  </ion-list>
+
+</ion-content>

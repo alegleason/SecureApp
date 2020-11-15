@@ -14,8 +14,7 @@ export class LoginPage implements OnInit {
   constructor(private faio: FingerprintAIO, private router: Router, private modalCtrl: ModalController) { }
 
   ngOnInit() {
-    /* Hide the headers if we are dealing with the modal version */
-    console.log('i am a modal: ', this.isModal)
+
   }
 
   login(){
