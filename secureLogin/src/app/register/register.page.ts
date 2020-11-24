@@ -34,7 +34,7 @@ export class RegisterPage implements OnInit {
   }
 
   ngOnInit () {
-
+    //this.storageService.clearStorage();
   }
 
   OnSubmitRegister(){
@@ -50,21 +50,24 @@ export class RegisterPage implements OnInit {
 
   addUser(){
     if(this.email != undefined && this.password != undefined){
-      this.encryptedText = CryptoJS.AES.encrypt(this.password.trim(), this.privateKey.trim()).toString();
-      this.password = this.encryptedText;
+      if(this.password.length < 6){
+        this.showToastFail('Weak password! Password should be at least 6 characters');
+      }else{
+        this.encryptedText = CryptoJS.AES.encrypt(this.password.trim(), this.privateKey.trim()).toString();
+        this.password = this.encryptedText;
+        this.newUser.id = Date.now();
+        this.newUser.pass = this.password;
+        this.newUser.mail = this.email;
+        
+        console.log("User " + this.newUser.mail + " saved with password " + this.newUser.pass);
 
-      this.newUser.id = Date.now();
-      this.newUser.pass = this.password;
-      this.newUser.mail = this.email;
-      
-      console.log("User " + this.newUser.mail + " saved with password " + this.newUser.pass);
-
-      this.storageService.addUser(this.newUser).then(user => {
-        this.newUser = <User>{};
-        this.showToastSuccess('User added');
-        this.loadUsers();
-        this.hasRegistered = true;
-      })
+        this.storageService.addUser(this.newUser).then(user => {
+          this.newUser = <User>{};
+          this.showToastSuccess('User added');
+          this.loadUsers();
+          this.hasRegistered = true;
+        })
+      }
     }
   }
 
